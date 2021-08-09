@@ -1,5 +1,5 @@
 """
-   Contains the tests for the console 
+   Contains the tests for the console
 """
 import unittest
 from models import storage
@@ -16,6 +16,7 @@ from unittest.mock import patch
 
 import sys
 import os
+
 
 def setUpModule():
     """Set up resources to be used in the test module"""
@@ -43,6 +44,7 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("")
             self.assertEqual("", f.getvalue().strip())
+
 
 class TestHBNBCommand_create(unittest.TestCase):
     """Test the HBNBCommand create command"""
@@ -72,18 +74,16 @@ class TestHBNBCommand_create(unittest.TestCase):
 class TestHBNBCommand_create_with_parameters(unittest.TestCase):
     """Test the create command when parameters are passed"""
 
-
-        
     def test_HBNBCommand_create_new_instances_with_pars(self):
         """Test creation of new instances with parameters"""
         Mm = ['BaseModel', 'User', 'Place',
-            'City', 'State', 'Review', 'Amenity']
+              'City', 'State', 'Review', 'Amenity']
 
         for m in Mm:
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd('''create {}
                     city_id="0001" user_id="0001" name="My_little_house"
-                    number_rooms=4 number_bathrooms=2 max_guest=10 
+                    number_rooms=4 number_bathrooms=2 max_guest=10
                     price_by_night=300 latitude=37.773972 longitude=-122.431297
                                      '''.format(m))
 
@@ -122,6 +122,7 @@ class TestHBNBCommand_show(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd('show {} {}'.format(inst[0], inst[1]))
                 self.assertEqual(value_str, f.getvalue().strip())
+
 
 class TestHBNBCommand_destroy(unittest.TestCase):
     """Test the HBNBCommand destroy command"""
@@ -237,11 +238,12 @@ class TestHBNBCommand_update(unittest.TestCase):
         objs = storage.all()
         key = list(objs.keys())[0].split(".")
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('update {} {} name Silvia'.
-                                                  format(key[0], key[1]))
+            HBNBCommand().onecmd('update {} {} name Silvia'.format(key[0],
+                                                                   key[1]))
             HBNBCommand().onecmd('show {} {}'.format(key[0], key[1]))
             self.assertIn('name', f.getvalue().strip())
             self.assertIn('Silvia', f.getvalue().strip())
+
 
 if __name__ == '__main__':
     unittest.main()

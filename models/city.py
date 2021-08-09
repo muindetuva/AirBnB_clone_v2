@@ -1,9 +1,22 @@
 #!/usr/bin/python3
 """ City Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
+import os
 
 
-class City(BaseModel):
-    """ The city class, contains state ID and name """
-    state_id = ""
-    name = ""
+class City(BaseModel, Base):
+    """
+    The city class, contains state ID and name
+    Attributes:
+        __tablename__(str): Name of the table to map to in the db
+        name(str): Name of the city. String 128 chars and can't be null
+        state_id(str): The id of state city is in can't be nul 60 chars
+    """
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = 'cities'
+        name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+    else:
+        name = ""
+        state_id = ""

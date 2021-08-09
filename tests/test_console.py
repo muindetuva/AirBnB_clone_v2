@@ -242,3 +242,6 @@ class TestHBNBCommand_update(unittest.TestCase):
             HBNBCommand().onecmd('show {} {}'.format(key[0], key[1]))
             self.assertIn('name', f.getvalue().strip())
             self.assertIn('Silvia', f.getvalue().strip())
+
+if __name__ == '__main__':
+    unittest.main()

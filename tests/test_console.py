@@ -1,5 +1,5 @@
 """
-   Contains the tests for the console
+Contains the tests for the console
 """
 import unittest
 from models import storage

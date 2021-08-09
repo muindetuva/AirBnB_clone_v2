@@ -14,17 +14,17 @@ from models.amenity import Amenity
 classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
+
 class DBStorage:
     """This class manages storage of hbnb models in JSON a relational DB"""
     __engine = None
     __session = None
 
-
     def __init__(self):
         """Creates the engine"""
         dialect = "mysql"
         driver = "mysqldb"
-        port =3306
+        port = 3306
         user = os.getenv("HBNB_MYSQL_USER")
         passwd = os.getenv("HBNB_MYSQL_PWD")
         host = os.getenv("HBNB_MYSQL_HOST")
@@ -34,10 +34,9 @@ class DBStorage:
             dialect, driver, user, passwd, host, port, db_name)
 
         self.__engine = create_engine(db_uri, pool_pre_ping=True)
-    
+
         if os.getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
@@ -45,7 +44,7 @@ class DBStorage:
         if cls:
             if type(cls) == str:
                 cls = classes[cls]
-        
+
             objs = self.__session.query(cls).all()
             for obj in objs:
                 key = obj.__class__.__name__ + "." + obj.id
@@ -56,7 +55,7 @@ class DBStorage:
             for cls in classes.values():
                 objs = self.__session.query(cls).all()
                 for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id                
+                    key = obj.__class__.__name__ + "." + obj.id
                     new_dict[key] = obj
 
             return new_dict
@@ -75,8 +74,8 @@ class DBStorage:
         create the current database session from the engine
         """
         Base.metadata.creat_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(session_factory)
+        sesn_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(sesn_factory)
         self.__session = Session()
 
     def delete(self, obj=None):

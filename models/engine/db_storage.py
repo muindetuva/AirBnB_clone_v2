@@ -13,7 +13,7 @@ from models.base_model import Base
 
 
 classes = {"City": City, "State": State, "User": User, "Place": Place,
-           "Review": Review}
+           "Review": Review, "Amenity": Amenity}
 
 
 class DBStorage:

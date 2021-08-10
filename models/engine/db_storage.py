@@ -47,17 +47,12 @@ class DBStorage:
                 cls = classes[cls]
 
             objs = self.__session.query(cls).all()
-            for obj in objs:
-                key = obj.__class__.__name__ + "." + obj.id
-                new_dict[key] = obj
-
-            return new_dict
         else:
-            for cls in classes.values():
-                objs = self.__session.query(cls).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    new_dict[key] = obj
+            objs = self.__session.query(State, City, User, Amenity, Place,
+                                        Review)
+        for obj in objs:
+            key = obj.__class__.__name__ + "." + obj.id
+            new_dict[key] = obj
 
             return new_dict
 

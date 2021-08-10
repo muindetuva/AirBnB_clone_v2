@@ -15,14 +15,11 @@ class State(BaseModel, Base):
         name(str): The name of the State
         cities: Relationship between city and state
     """
-    if os.getenv('HBNB_TYPE_STORAGE') == "db":
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state", cascade="all, delete, \
-                               delete-orphan")
-    else:
-        name = ""
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", backref="state", cascade="all, delete")
 
+    if os.getenv('HBNB_TYPE_STORAGE') != "db":
         @property
         def cities(self):
             '''A getter method for cities from file storage'''

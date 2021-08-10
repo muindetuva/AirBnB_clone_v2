@@ -12,7 +12,7 @@ from models.amenity import Amenity
 from models.base_model import Base
 
 
-classes = {"City": City, "State": State}
+classes = {"City": City, "State": State, "User": User}
 
 
 class DBStorage:

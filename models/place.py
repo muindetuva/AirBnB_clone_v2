@@ -15,7 +15,6 @@ if os.getenv("HBNB_TYPE_STORAGE") == "db":
                                  ForeignKey('amenities.id'), nullable=False))
 
 
-
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
@@ -29,14 +28,13 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer(), nullable=False, default=0)
     latitude = Column(Float(), nullable=False)
     longitude = Column(Float(), nullable=False)
-        
+
     reviews = relationship("Review", backref="place", cascade="all, delete")
 
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
         amenities = relationship('Amenity', secondary=place_amenity,
                                  viewonly=False,
                                  back_populates='place_amenities')
-    
 
     if os.getenv("HBNB_TYPE_STORAGE") != "db":
         @property
@@ -59,7 +57,8 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, obj):
             '''
-            handles append method for adding an Amenity.id to the attribute amenity_ids.
+            handles append method for adding an Amenity.id to the attribute
+            amenity_ids.
             '''
             if obj.__class__.__name__ == "Amenity":
                 self.amenity_ids.append(obj.id)

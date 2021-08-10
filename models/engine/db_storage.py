@@ -9,6 +9,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from models.amenity import Amenity
+from models.base_model import Base
 
 
 classes = {"Amenity": Amenity, "City": City,
@@ -73,7 +74,7 @@ class DBStorage:
         create all tables in the database
         create the current database session from the engine
         """
-        Base.metadata.creat_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
         sesn_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sesn_factory)
         self.__session = Session()

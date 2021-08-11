@@ -28,15 +28,16 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer(), nullable=False, default=0)
     latitude = Column(Float(), nullable=False)
     longitude = Column(Float(), nullable=False)
+    amenity_ids = []
 
-    reviews = relationship("Review", backref="place", cascade="all, delete")
 
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
         amenities = relationship('Amenity', secondary=place_amenity,
                                  viewonly=False,
                                  back_populates='place_amenities')
-
-    if os.getenv("HBNB_TYPE_STORAGE") != "db":
+        reviews = relationship("Review", backref="place", cascade="all,
+                               delete")
+    else:
         @property
         def reviews(self):
             '''A getter method for reviews when using file storage'''

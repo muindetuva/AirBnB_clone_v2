@@ -13,4 +13,4 @@ class Amenity(BaseModel, Base):
 
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
         place_amenities = relationship("Place", secondary='place_amenity',
-                                       backref="amenities")
+                                       back_populates="amenities")

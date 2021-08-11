@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
+import models
 from models.base_model import BaseModel, Base
 from models.review import Review
 from models.amenity import Amenity
@@ -42,7 +43,7 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             '''A getter method for reviews when using file storage'''
-            reviews = storage.all(Review).values()
+            reviews = models.storage.all(Review).values()
             rev_list = [rev for rev in reviews if self.id == rev.place_id]
             return rev_list
 
@@ -52,7 +53,7 @@ class Place(BaseModel, Base):
             returns the list of Amenity instances based on the attribute
             amenity_ids that contains all Amenity.id linked to the Place
             '''
-            amens = storage.all(Amenity).values()
+            amens = models.storage.all(Amenity).values()
             amen_list = [amen for amen in amens if amen.id in self.amenity_ids]
             return amen_list
 

@@ -188,7 +188,7 @@ class TestHBNBCommand_all(unittest.TestCase):
     def test_HBNBCommand_all_existing_instances_specific_class(self):
         """Test the creation of new instances of different classes"""
 
-        Mm = ['BaseModel', 'User', 'Place',
+        Mm = ['User', 'Place',
               'City', 'State', 'Review', 'Amenity']
         for m in Mm:
             with patch('sys.stdout', new=StringIO()) as f:

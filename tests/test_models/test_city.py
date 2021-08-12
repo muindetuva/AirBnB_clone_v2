@@ -11,19 +11,12 @@ class test_City(test_basemodel):
     Tests for the city model
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Init method
-        """
-        super().__init__(*args, **kwargs)
-        self.name = "City"
-        self.value = City
-
     def test_state_id(self):
         """
         Test that the id is a str
         """
         new = self.value()
+        new.state_id =" id"
         self.assertEqual(type(new.state_id), str)
 
     def test_name(self):
@@ -31,4 +24,5 @@ class test_City(test_basemodel):
         Test that the name is a str
         """
         new = self.value()
+        new.name = "Chicago"
         self.assertEqual(type(new.name), str)

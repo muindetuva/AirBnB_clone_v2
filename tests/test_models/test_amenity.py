@@ -24,4 +24,5 @@ class test_Amenity(test_basemodel):
         Test that the name is a string
         """
         new = self.value()
+        new.name = "Tuva"
         self.assertEqual(type(new.name), str)

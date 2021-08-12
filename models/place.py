@@ -9,8 +9,7 @@ from sqlalchemy.orm import relationship
 import os
 
 
-if os.getenv("HBNB_TYPE_STORAGE") == "db":
-    place_amenity = Table('place_amenity', Base.metadata,
+place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id'),
                                  primary_key=True, nullable=False),
@@ -33,12 +32,11 @@ class Place(BaseModel, Base):
     latitude = Column(Float())
     longitude = Column(Float())
     amenity_ids = []
-
-
     reviews = relationship("Review", backref="place", cascade="all, delete")
     amenities = relationship('Amenity', secondary=place_amenity,
                                  viewonly=False, backref='places')
-    else:
+
+    if os.getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def reviews(self):
             '''A getter method for reviews when using file storage'''

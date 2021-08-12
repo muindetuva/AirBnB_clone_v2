@@ -10,12 +10,12 @@ import os
 
 
 place_amenity = Table('place_amenity', Base.metadata,
-                          Column('place_id', String(60),
-                                 ForeignKey('places.id'),
-                                 primary_key=True, nullable=False),
-                          Column('amenity_id', String(60),
-                                 ForeignKey('amenities.id'),
-                                 primary_key=True, nullable=False))
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -34,7 +34,7 @@ class Place(BaseModel, Base):
     amenity_ids = []
     reviews = relationship("Review", backref="place", cascade="all, delete")
     amenities = relationship('Amenity', secondary=place_amenity,
-                              viewonly=False, back_populates='place_amenities')
+                             viewonly=False, back_populates='place_amenities')
 
     if os.getenv("HBNB_TYPE_STORAGE") != "db":
         @property

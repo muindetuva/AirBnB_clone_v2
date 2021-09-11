@@ -27,7 +27,7 @@ echo "
 " > /data/web_static/releases/test/index.html
 
 # Create a symbolic link each time
-ln -nsf /data/web_static/releases/test/ /data/webstatic/current 
+ln -nsf /data/web_static/releases/test/ /data/web_static/current 
 
 # Give ownership of the /data/ folder to the ubuntu user AND group
 sudo chown -R ubuntu:ubuntu /data/

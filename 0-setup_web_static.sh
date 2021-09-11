@@ -2,17 +2,17 @@
 # A script that sets up your web servers for the deployment of web_static.
 
 sudo apt-get -y update
-sudo apt-get instal -y nginx
+sudo apt-get install -y nginx
 
 # Make the necessary directories if they don't already exist
-if [ ! -d "/data/webstatic/releases/test/" ];
+if [[ ! -d "/data/web_static/releases/test/" ]];
 then
-    mkdir -p /data/webstatic/releases/test/
+    mkdir -p /data/web_static/releases/test/
 fi
 
-if [ ! -d "/data/webstatic/shared/" ]
+if [[ ! -d "/data/web_static/shared/" ]];
 then
-    mkdir -p /data/webstatic/shared/
+    mkdir -p /data/web_static/shared/
 fi
 
 # Make fake html file
@@ -27,7 +27,7 @@ echo "
 " > /data/web_static/releases/test/index.html
 
 # Create a symbolic link each time
-ln -nsf /data/web_static/releases/test/ /data/web_static/current 
+ln -nsf /data/web_static/releases/test/ /data/webstatic/current 
 
 # Give ownership of the /data/ folder to the ubuntu user AND group
 chown -R ubuntu:ubuntu /data/

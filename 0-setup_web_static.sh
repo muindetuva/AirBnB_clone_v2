@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # A script that sets up your web servers for the deployment of web_static.
 
-sudo apt-get -y update
-sudo apt-get install -y nginx
+# Check if nginx already exists before trying to install afresh
+if [[ ! -x /usr/sbin/nginx ]];
+then
+    sudo apt-get -y update
+    sudo apt-get install -y nginx
+fi
 
 # Make the necessary directories if they don't already exist
 if [[ ! -d "/data/web_static/releases/test/" ]];

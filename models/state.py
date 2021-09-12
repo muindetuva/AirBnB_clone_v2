@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
+import models
 import os
 
 
@@ -24,6 +25,6 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             '''A getter method for cities from file storage'''
-            cities = storage.all(City).values()
+            cities = models.storage.all(City).values()
             cities_list = [city for city in cities if self.id == city.state_id]
             return cities_list

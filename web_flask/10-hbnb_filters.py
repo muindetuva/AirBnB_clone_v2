@@ -18,7 +18,6 @@ def hbnb_filters():
                            amenities=amenities)
 
 
-
 @app.teardown_appcontext
 def close_session(exception):
     '''Removes current session after each request'''

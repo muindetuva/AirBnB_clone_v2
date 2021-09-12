@@ -14,10 +14,10 @@ def states(id=None):
     '''Returns a template with all the states in storage'''
     states = storage.all("State").values()
     if id is None:
-        return render_template('8-cities_by_states.html', states=states)
+        return render_template('9-states.html', states=states)
     else:
         state = next((state for state in states if state.id == id), None)
-        return render_template('8-cities_by_states.html', state=state)
+        return render_template('9-states.html', state=state)
 
 
 @app.teardown_appcontext

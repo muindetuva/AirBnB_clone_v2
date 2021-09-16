@@ -3,7 +3,7 @@
 Module contains a fab script to generates a .tgz archive from the contents
 of the web_static
 '''
-from fabric.api import local, env, put, run
+from fabric.api import local, env, put, run, lcd, cd
 import os
 import time
 
@@ -96,8 +96,10 @@ def do_clean(number=0):
     # Delete the files locally and also on the server
     with lcd('versions'):
         for f in files:
+#            print(f)
             local('rm {}'.format(f))
 
     with cd('/data/web_static/releases'):
         for f in files:
+            #print('rm -rf {}'.format(f.split('.'[0])))
             run('rm -rf {}'.format(f.split('.'[0])))

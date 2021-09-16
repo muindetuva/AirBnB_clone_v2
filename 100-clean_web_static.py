@@ -96,10 +96,8 @@ def do_clean(number=0):
     # Delete the files locally and also on the server
     with lcd('versions'):
         for f in files:
-#            print(f)
             local('rm {}'.format(f))
 
     with cd('/data/web_static/releases'):
         for f in files:
-            #print('rm -rf {}'.format(f.split('.'[0])))
             run('rm -rf {}'.format(f.split('.'[0])))
